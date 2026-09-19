@@ -1,9 +1,13 @@
 // COMSC 210 | Lab 9 | Yeji Kim
 
 #include <iostream>
+
 #include <fstream>
+
 #include <array>
+
 #include <vector>
+
 #include <algorithm>
 
 using namespace std;
@@ -14,32 +18,33 @@ const int DAYS = 30;
 
 // function to display the array
 
-void displayArray(const array<int, DAYS>& samples) { 
-    cout << "\nSoil samples processed each day:\n"; 
-    for (auto it = samples.cbegin(); it != samples.cend(); ++it) { 
-        cout << *it << " "; 
-    } 
-    cout << endl; }
+void displayArray(const array < int, DAYS > & samples) {
+    cout << "\nSoil samples processed each day:\n";
+    for (auto it = samples.cbegin(); it != samples.cend(); ++it) {
+        cout << * it << " ";
+    }
+    cout << endl;
+}
 
 // function to display the vector
 
-void displayVector(const vector<int>& samples) {
+void displayVector(const vector < int > & samples) {
     cout << "\nSoil samples processed each day:\n";
-    for (auto it = samples.cbegin(); it != samples.cend(); ++it) { 
-        cout << *it << " "; 
-    } 
-    cout << endl; 
+    for (auto it = samples.cbegin(); it != samples.cend(); ++it) {
+        cout << * it << " ";
+    }
+    cout << endl;
 }
 
 int main() {
     // std::array
 
-    cout << "SOIL SAMPLE PROCESSING SIMULATION\n"; 
+    cout << "SOIL SAMPLE PROCESSING SIMULATION\n";
     cout << "\nPART 1: STD::ARRAY\n";
 
     // make an array to store the number of samples processed during each of the 30 days
 
-    array<int, DAYS> samples;
+    array < int, DAYS > samples;
 
     // open external data file
 
@@ -65,108 +70,108 @@ int main() {
     // array functions:
 
     // array::size()
-    
-    cout << "\nNumber of days recorded: " << samples.size() << endl; 
-    
+
+    cout << "\nNumber of days recorded: " << samples.size() << endl;
+
     // array::max_size() 
-    
-    cout << "Maximum possible array size: " << samples.max_size() << endl; 
-    
+
+    cout << "Maximum possible array size: " << samples.max_size() << endl;
+
     // array::empty() 
-    
+
     cout << "Is the array empty? ";
-    
-    if (samples.empty()) { 
-        cout << "Yes\n"; 
-    } 
-    else { cout << "No\n"; 
+
+    if (samples.empty()) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
     }
 
     // array::front() 
-    
-    cout << "Samples processed on Day 1: " << samples.front() << endl; 
-    
+
+    cout << "Samples processed on Day 1: " << samples.front() << endl;
+
     // array::back() 
-    
-    cout << "Samples processed on Day 30: " << samples.back() << endl; 
-    
+
+    cout << "Samples processed on Day 30: " << samples.back() << endl;
+
     // array::at() 
-    
-    cout << "Samples processed on Day 6: " << samples.at(5) << endl; 
-    
+
+    cout << "Samples processed on Day 6: " << samples.at(5) << endl;
+
     // array::operator[] 
-    
-    cout << "Samples processed on Day 11: " << samples[10] << endl; 
-    
+
+    cout << "Samples processed on Day 11: " << samples[10] << endl;
+
     // array::data() 
-    
-    cout << "First value using data(): " << *samples.data() << endl;
+
+    cout << "First value using data(): " << * samples.data() << endl;
 
     // calc total samples
 
     int totalSamples = 0;
 
-    for (auto it = samples.begin(); it != samples.end(); ++it) { 
-        totalSamples += *it; 
-    } 
-        
-    cout << "\nTotal soil samples processed: " << totalSamples << endl; 
-    
+    for (auto it = samples.begin(); it != samples.end(); ++it) {
+        totalSamples += * it;
+    }
+
+    cout << "\nTotal soil samples processed: " << totalSamples << endl;
+
     // calc average 
-    
-    double average = static_cast<double>(totalSamples) / samples.size(); 
+
+    double average = static_cast < double > (totalSamples) / samples.size();
     cout << "Average samples processed per day: " << average << endl;
 
     // find highest/lowest processing days
 
-    auto highest = max_element(samples.begin(), samples.end()); 
-    auto lowest = min_element(samples.begin(), samples.end()); 
+    auto highest = max_element(samples.begin(), samples.end());
+    auto lowest = min_element(samples.begin(), samples.end());
 
-    cout << "Highest number of samples in one day: " << *highest << endl; 
-    cout << "Lowest number of samples in one day: " << *lowest << endl;
+    cout << "Highest number of samples in one day: " << * highest << endl;
+    cout << "Lowest number of samples in one day: " << * lowest << endl;
 
     // find which day had most/least samples
 
-    int highestDay = (highest - samples.begin()) + 1; 
-    int lowestDay = (lowest - samples.begin()) + 1; 
-    
-    cout << "Highest processing day: Day " << highestDay << endl; 
+    int highestDay = (highest - samples.begin()) + 1;
+    int lowestDay = (lowest - samples.begin()) + 1;
+
+    cout << "Highest processing day: Day " << highestDay << endl;
     cout << "Lowest processing day: Day " << lowestDay << endl;
 
     // find how many days were above avg
 
-    int aboveAverage = 0; 
-    for (auto it = samples.begin(); it != samples.end(); ++it) { 
-        if (*it > average) { 
-            aboveAverage++; 
-        } 
-    } 
-        
-        cout << "Days above the average: " << aboveAverage << endl;
+    int aboveAverage = 0;
+    for (auto it = samples.begin(); it != samples.end(); ++it) {
+        if ( * it > average) {
+            aboveAverage++;
+        }
+    }
+
+    cout << "Days above the average: " << aboveAverage << endl;
 
     // std::vector
-    
-    cout << "PART 2: STD::VECTOR\n"; 
+
+    cout << "PART 2: STD::VECTOR\n";
 
     //make an empty vector
-    vector<int> sampleVector;
+    vector < int > sampleVector;
 
-    // open ext data file
-    ifstream inputFile("soil_samples.txt");
-
+    // reopen ext data file
+    inputFile.open("soil_samples.txt");
+    
     if (!inputFile) {
         cout << "Error opening file\n";
         return 1;
     }
-
-    // read data into vector
-    int sampleCount; 
-
-    while (vectorFile >> sampleCount) { 
-        sampleVector.push_back(sampleCount); 
-    } 
     
-    vectorFile.close();
+    // read data into vector
+    int sampleCount;
+    
+    while (inputFile >> sampleCount) {
+        sampleVector.push_back(sampleCount);
+    }
+
+    inputFile.close();
 
     // display vector
     displayVector(sampleVector);
@@ -174,20 +179,56 @@ int main() {
     //vector functions:
 
     // vector::size() 
-    cout << "\nNumber of days recorded: " << sampleVector.size() << endl; 
-    
+    cout << "\nNumber of days recorded: " << sampleVector.size() << endl;
+
     // vector::capacity() 
-    cout << "Vector capacity: " << sampleVector.capacity() << endl; 
-    
+    cout << "Vector capacity: " << sampleVector.capacity() << endl;
+
     // vector::empty() 
-    cout << "Is the vector empty? "; 
-    
-    if (sampleVector.empty()) { 
-        cout << "Yes\n"; 
-    } 
-    else { 
-        cout << "No\n"; 
+    cout << "Is the vector empty? ";
+
+    if (sampleVector.empty()) {
+        cout << "Yes\n";
+    } else {
+        cout << "No\n";
     }
+
+    // vector::front() 
+    cout << "Samples processed on Day 1: " << sampleVector.front() << endl;
+
+    // vector::back() 
+    cout << "Samples processed on Day 30: " << sampleVector.back() << endl;
+
+    // vector::at() 
+    cout << "Samples processed on Day 6: " << sampleVector.at(5) << endl;
+
+    // vector::operator[] 
+    cout << "Samples processed on Day 11: " << sampleVector[10] << endl;
+
+    // vector::data() 
+    cout << "First value using data(): " << * sampleVector.data() << endl;
+
+    // calc total samples
+    int vectorTotal = 0;
+
+    for (auto it = sampleVector.begin(); it != sampleVector.end(); ++it) {
+        vectorTotal += * it;
+    }
+    cout << "\nTotal soil samples processed: " << vectorTotal << endl;
+
+    // calc average 
+    double vectorAverage = static_cast < double > (vectorTotal) / sampleVector.size();
+    cout << "Average samples processed per day: " << vectorAverage << endl;
+
+    // find highest/lowest values
+    auto vectorHighest = max_element(sampleVector.begin(), sampleVector.end());
+    auto vectorLowest = min_element(sampleVector.begin(), sampleVector.end());
+
+    cout << "Highest number of samples in one day: " << * vectorHighest << endl;
+    cout << "Lowest number of samples in one day: " << * vectorLowest << endl;
+
+    // end of program
+    cout << "SIMULATION COMPLETE\n";
 
     return 0;
 }
